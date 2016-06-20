@@ -254,7 +254,7 @@ Animation.prototype._next = function(task){
     task.wait ?
         setTimeout(function(){
             self._runTask();
-        }):
+        },task.wait):
     this._runTask();
 }
 
