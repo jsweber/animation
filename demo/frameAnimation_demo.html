@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>li,div,span,img,html,body,ul,ol,footer,header,label,input,a,em{margin:0;padding:0;}
+    html{font-size:20px;}
+    li,ol,ul{list-style: none;}
+    li{border-bottom:1px solid #ccc;margin-bottom:20px;}
+    input{color:#999;}
+    a{text-decoration: none;}</style>
+</head>
+<body>
+<div class="lee" style="width:153px;height:251px;background-repeat: no-repeat;"></div>
+<script src="../build/animation.js"></script>
+<script>
+    var lee = document.querySelector(".lee");
+//    var positions = ['0 0','0 0','-153 0','-306 0'];
+    var positions = ['0 0','-153 0','-306 0'];
+    var url = 'run_lee.png';
+    var ani = animation().loadImage([url]).changePosition(lee,positions,url).repeat();
+    ani.start(100);
+</script>
+</body>
+</html>
