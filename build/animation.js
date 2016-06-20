@@ -109,7 +109,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            //    ele.style.backgroundImage = 'url('+imageUrl+')';
 	            //}
 	            var index = Math.min(time / self.interval | 0,len) - 1;  //     time / this.interval | 0 相当于 Math.floor(time / this.interval);  但是效率更好
-				var position = positions[index].split(' ');
+	            var position = positions[index].split(' ');
 	            ele.style.backgroundPosition = position[0]+'px '+position[1]+'px';
 	            if(index === len-1){
 	                next();
@@ -289,7 +289,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	Animation.prototype._asyncTask = function(task){
 	    var self = this;
 	    //重写每一帧的回调函数
-		var enterFrame = function(time){
+	    var enterFrame = function(time){
 	        var taskFn = task.taskFn;
 	        var next = function(){
 	            self.timeline.stop();
@@ -298,8 +298,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        taskFn(next,time);
 	    }
 	    this.timeline.onenterframe = enterFrame;
-		this.timeline.start(this.interval);
-
+	    this.timeline.start(this.interval);
 	}
 	/*
 	* 切换到下一个任务，如果当前任务需要等待则延时执行
@@ -508,11 +507,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	    * */
 	    function nextTick(){
 	        var nowTime = +new Date();
+
 	        timeline.animationHandler = requestAnimationFrame(nextTick);
 	        if(nowTime - prevTime >= timeline.interval){
-				timeline.onenterframe(nowTime - starttime);
-				prevTime = nowTime;
-			}
+	            timeline.onenterframe(nowTime - starttime);
+	            prevTime = nowTime;
+	        }
 	    }
 	}
 
