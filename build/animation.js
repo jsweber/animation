@@ -101,13 +101,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var taskFn;
 	    var type;
 	    if(len){
-	        if(imageUrl){
-	            ele.style.backgroundImage = 'url('+imageUrl+')';
-	        }
+	        //if(imageUrl){
+	        //    ele.style.backgroundImage = 'url('+imageUrl+')';
+	        //}
 	        taskFn = function(next,time){
-	            //if(imageUrl){
-	            //    ele.style.backgroundImage = 'url('+imageUrl+')';
-	            //}
+	            if(imageUrl){
+	                ele.style.backgroundImage = 'url('+imageUrl+')';
+	            }
 	            var index = Math.min(time / self.interval | 0,len) - 1;  //     time / this.interval | 0 相当于 Math.floor(time / this.interval);  但是效率更好
 	            var position = positions[index].split(' ');
 	            ele.style.backgroundPosition = position[0]+'px '+position[1]+'px';

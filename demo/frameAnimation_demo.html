@@ -8,11 +8,22 @@
     li,ol,ul{list-style: none;}
     li{border-bottom:1px solid #ccc;margin-bottom:20px;}
     input{color:#999;}
-    a{text-decoration: none;}</style>
+    a{text-decoration: none;}
+    #rabbit{
+        position: absolute;
+        left: 100px;
+        width: 102px;
+        height: 80px;
+        background-repeat: no-repeat;
+        top:500px;
+    }
+    </style>
 </head>
 <body>
 <div class="lee" style="width:153px;height:251px;background-repeat: no-repeat;"></div>
 <div id="showNum" style="height:100px;font-size:30px;border:2px solid black;width:100px;line-height: 100px;"></div>
+<div id="rabbit"></div>
+
 <script src="../build/animation.js"></script>
 <script>
     var lee = document.querySelector(".lee");
@@ -28,6 +39,53 @@
         if(time > 3 * 1000)next();
     }).then(function(){console.log('ok');});
     numAnimation.start(1000);
+
+    (function(){
+        var rightRunningMap = ["0 -854", "-174 -852", "-349 -852", "-524 -852", "-698 -851", "-873 -848"];
+        var leftRunningMap = ["0 -373", "-175 -376", "-350 -377", "-524 -377", "-699 -377", "-873 -379"];
+        var rabbitWinMap = ["0 0", "-198 0", "-401 0", "-609 0", "-816 0", "0 -96", "-208 -97", "-415 -97", "-623 -97", "-831 -97", "0 -203", "-207 -203", "-415 -203", "-623 -203", "-831 -203", "0 -307", "-206 -307", "-414 -307", "-623 -307"];
+        var rURL = ['rabbit-big.png','rabbit-win.png'];
+        var r = document.querySelector('#rabbit');
+        var frame = 3;
+        var framelength = 6;
+        var initLeft = 100;
+        var finalLeft = 400;
+        var interval = 50;
+        var speed = 6;
+        var right = true;
+        var x = 0;
+        var position = 0;
+        var rabbitAnimation = animation().loadImage(rURL).then(function(){r.style.backgroundImage='url('+ rURL[0] +')'}).enterFrame(function(next,time){
+            var radio = time / interval | 0;
+            if(right){
+                x = Math.min(initLeft+radio*6,finalLeft);
+                position = rightRunningMap[frame].split(' ');
+                if(x === finalLeft){
+                    right = false;
+                    frame = 3;
+                    next();
+                    return;
+                }
+            }else{
+                x = Math.max(finalLeft-radio*6,initLeft);
+                position = leftRunningMap[frame].split(' ');
+                if(x === initLeft){
+                    right = true;
+                    frame = 3;
+                    next();
+                    return;
+                }
+            }
+            if(++frame === framelength){
+                frame = 0;
+            }
+            r.style.backgroundPosition = position[0]+'px '+position[1]+'px';
+            r.style.left = x+'px';
+        }).repeat(1).wait(1000).changePosition(r,rabbitWinMap,rURL[1]).start(interval);
+//        var rabbitAnimation = animation().loadImage(rURL).changePosition(r,rabbitWinMap,rURL[1]).start(interval);
+    })();
+
+
 </script>
 </body>
 </html>
