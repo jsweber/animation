@@ -12,6 +12,7 @@
 </head>
 <body>
 <div class="lee" style="width:153px;height:251px;background-repeat: no-repeat;"></div>
+<div id="showNum" style="height:100px;font-size:30px;border:2px solid black;width:100px;line-height: 100px;"></div>
 <script src="../build/animation.js"></script>
 <script>
     var lee = document.querySelector(".lee");
@@ -20,6 +21,13 @@
     var url = 'run_lee.png';
     var ani = animation().loadImage([url]).changePosition(lee,positions,url).repeat(3);
     ani.start(100);
+
+    var showNum = document.querySelector("#showNum");
+    var numAnimation = animation().enterFrame(function(next,time){
+        showNum.innerHTML = time;
+        if(time > 3 * 1000)next();
+    }).then(function(){console.log('ok');});
+    numAnimation.start(1000);
 </script>
 </body>
 </html>
